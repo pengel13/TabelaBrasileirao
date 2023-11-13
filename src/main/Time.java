@@ -1,4 +1,4 @@
-package base;
+package main;
 
 public class Time {
 	private String nome;
