@@ -1,8 +1,9 @@
-package main;
+package main.entities;
 
 public class Rodada {
 	private int numeroRodada;
 	private Partida partida1, partida2, partida3, partida4, partida5;
+	
 	public int getNumeroRodada() {
 		return numeroRodada;
 	}

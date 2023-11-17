@@ -1,4 +1,4 @@
-package main;
+package main.entities;
 
 public class Time {
 
@@ -9,12 +9,12 @@ public class Time {
 
 	}
 
-	public Time(String nome, int rodadasJogadas, int pontuacao, int golsMarcados, int golsSofridos) {
+	public Time(String nome) {
 		this.nome = nome;
-		this.rodadasJogadas = rodadasJogadas;
-		this.pontuacao = pontuacao;
-		this.golsMarcados = golsMarcados;
-		this.golsSofridos = golsSofridos;
+		this.rodadasJogadas = 0;
+		this.pontuacao = 0;
+		this.golsMarcados = 0;
+		this.golsSofridos = 0;
 	}
 
 	public String getNome() {

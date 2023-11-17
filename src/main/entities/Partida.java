@@ -1,9 +1,11 @@
-package main;
+package main.entities;
 
 public class Partida {
 	private Time timeCasa;
 	private Time timeVisitante;
+	
 	private int golsCasa, golsVisitante;
+	
 	public Time getTimeCasa() {
 		return timeCasa;
 	}
