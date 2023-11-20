@@ -2,25 +2,31 @@ package main.application;
 
 import java.util.Scanner;
 
+import main.entities.Tabela;
 import main.entities.Time;
 
 public class Main {
+
+	private static Tabela tabela = new Tabela();
+
 	public static void main(String[] args) {
-		
+		menu(tabela);
+		tabela.verTabela();
 	}
-	
-	public static void menu() {
+
+	public static void menu(Tabela tabela) {
 		Scanner in = new Scanner(System.in);
-		
-		Time time1 = new Time("Grêmio");
-		Time time2 = new Time("Fluminense");
-		Time time3 = new Time("Cruzeiro");
-		Time time4 = new Time("São Paulo");
-		Time time5 = new Time("Palmeiras");
-		Time time6 = new Time("Coritiba");
-		Time time7 = new Time("Bragantino");
-		Time time8 = new Time("Botafogo");
-		Time time9 = new Time("Juventude");
-		Time time10 = new Time("Brasil de Pelotas");
+
+		tabela.addTime(new Time("Grêmio"));
+		tabela.addTime(new Time("Fluminense"));
+		tabela.addTime(new Time("Atlético MG"));
+		tabela.addTime(new Time("São Paulo"));
+		tabela.addTime(new Time("Palmeiras"));
+		tabela.addTime(new Time("Coritiba"));
+		tabela.addTime(new Time("Bragantino"));
+		tabela.addTime(new Time("Botafogo"));
+		tabela.addTime(new Time("Juventude"));
+		tabela.addTime(new Time("Brasil de Pelotas"));
+
 	}
 }
