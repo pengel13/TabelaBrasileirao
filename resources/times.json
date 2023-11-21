@@ -1,0 +1,82 @@
+[
+  {
+    "nome": "Grêmio",
+    "rodadasJogadas": 10,
+    "pontuacao": 25,
+    "vitorias": 7,
+    "golsMarcados": 20,
+    "golsSofridos": 15
+  },
+  {
+    "nome": "Fluminense",
+    "rodadasJogadas": 10,
+    "pontuacao": 23,
+    "vitorias": 6,
+    "golsMarcados": 18,
+    "golsSofridos": 14
+  },
+  {
+    "nome": "Atlético MG",
+    "rodadasJogadas": 10,
+    "pontuacao": 30,
+    "vitorias": 8,
+    "golsMarcados": 25,
+    "golsSofridos": 12
+  },
+  {
+    "nome": "Brasil de Pelotas",
+    "rodadasJogadas": 10,
+    "pontuacao": 25,
+    "vitorias": 7,
+    "golsMarcados": 20,
+    "golsSofridos": 15
+  },
+  {
+    "nome": "Juventude",
+    "rodadasJogadas": 10,
+    "pontuacao": 23,
+    "vitorias": 6,
+    "golsMarcados": 18,
+    "golsSofridos": 14
+  },
+  {
+    "nome": "Botafogo",
+    "rodadasJogadas": 10,
+    "pontuacao": 30,
+    "vitorias": 8,
+    "golsMarcados": 25,
+    "golsSofridos": 12
+  },
+  {
+    "nome": "Bragantino",
+    "rodadasJogadas": 10,
+    "pontuacao": 25,
+    "vitorias": 7,
+    "golsMarcados": 20,
+    "golsSofridos": 15
+  },
+  {
+    "nome": "Coritiba",
+    "rodadasJogadas": 10,
+    "pontuacao": 23,
+    "vitorias": 6,
+    "golsMarcados": 18,
+    "golsSofridos": 14
+  },
+  {
+    "nome": "Palmeiras",
+    "rodadasJogadas": 10,
+    "pontuacao": 30,
+    "vitorias": 8,
+    "golsMarcados": 25,
+    "golsSofridos": 12
+  },
+  {
+    "nome": "São Paulo",
+    "rodadasJogadas": 10,
+    "pontuacao": 30,
+    "vitorias": 8,
+    "golsMarcados": 25,
+    "golsSofridos": 12
+  }
+]
