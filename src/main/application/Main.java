@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import main.entities.Tabela;
 import main.entities.Time;
+import main.services.LerJsonService;
 
 public class Main {
 
@@ -11,10 +12,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		menu(tabela);
-		tabela.verTabela();
+		tabela.verTabela(); //printa a tabela oficial formatada 
 	}
 
 	public static void menu(Tabela tabela) {
+		LerJsonService lerJson = new LerJsonService();
 		Scanner in = new Scanner(System.in);
 
 		tabela.addTime(new Time("Grêmio"));
@@ -28,5 +30,14 @@ public class Main {
 		tabela.addTime(new Time("Juventude"));
 		tabela.addTime(new Time("Brasil de Pelotas"));
 
+		imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo 
+
+	}
+
+	public static void imprimirTimes(LerJsonService lerJson, String path) {
+		for (Time time : lerJson.lerListaDeTimes(path)) {
+			System.out.println("Time: " + time + "\n");
+			
+		} //teste pra printar o json -> não está formatado
 	}
 }

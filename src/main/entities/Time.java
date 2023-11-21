@@ -85,4 +85,12 @@ public class Time {
 		return golsMarcados - golsSofridos;
 	}
 
+	@Override
+	public String toString() {
+		return "[nome=" + nome + ", rodadasJogadas=" + rodadasJogadas + ", pontuacao=" + pontuacao + ", vitorias="
+				+ vitorias + ", golsMarcados=" + golsMarcados + ", golsSofridos=" + golsSofridos + "]";
+	}
+	
+	
+
 }
