@@ -1,5 +1,6 @@
 package main.entities;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import main.comparators.NumeroDePontosComparator;
@@ -8,9 +9,7 @@ import main.comparators.SaldoDeGolsComparator;
 
 public class Tabela {
 	private PriorityQueue<Time> tabela;
-	private NumeroDePontosComparator numeroDePontosComparator;
-	private NumeroDeVitoriasComparator numeroDeVitoriasComparator;
-	private SaldoDeGolsComparator saldoDeGolsComparator;
+	private Comparator<Time> numeroDePontosComparator, numeroDeVitoriasComparator, saldoDeGolsComparator;
 
 	public Tabela() {
 		numeroDePontosComparator = new NumeroDePontosComparator();

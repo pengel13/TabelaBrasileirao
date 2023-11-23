@@ -19,18 +19,18 @@ public class Main {
 		LerJsonService lerJson = new LerJsonService();
 		Scanner in = new Scanner(System.in);
 
-		tabela.addTime(new Time("Grêmio"));
-		tabela.addTime(new Time("Fluminense"));
-		tabela.addTime(new Time("Atlético MG"));
-		tabela.addTime(new Time("São Paulo"));
-		tabela.addTime(new Time("Palmeiras"));
-		tabela.addTime(new Time("Coritiba"));
-		tabela.addTime(new Time("Bragantino"));
-		tabela.addTime(new Time("Botafogo"));
-		tabela.addTime(new Time("Juventude"));
-		tabela.addTime(new Time("Brasil de Pelotas"));
+		tabela.addTime(new Time("Grêmio", 40, 12));
+		tabela.addTime(new Time("Fluminense", 12, 3));
+		tabela.addTime(new Time("Atlético MG", 12, 4));
+		tabela.addTime(new Time("São Paulo", 25, 7));
+		tabela.addTime(new Time("Palmeiras", 23, 5));
+		tabela.addTime(new Time("Coritiba", 34, 8));
+		tabela.addTime(new Time("Bragantino", 34, 7));
+		tabela.addTime(new Time("Botafogo", 36, 10));
+		tabela.addTime(new Time("Juventude", 35, 12));
+		tabela.addTime(new Time("Brasil de Pelotas", 40, 10));
 
-		imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo 
+		//imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo 
 
 	}
 
