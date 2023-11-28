@@ -3,7 +3,7 @@ package main.entities;
 public class Time {
 
 	private String nome;
-	private int rodadasJogadas, pontuacao, vitorias, golsMarcados, golsSofridos;
+	private int rodadasJogadas, pontuacao, vitorias, empates, derrotas, golsMarcados, golsSofridos;
 
 	public Time() {
 
@@ -26,12 +26,24 @@ public class Time {
 		this.golsSofridos = 0;
 		this.vitorias = 0;
 	}
-	
+
 	public int incrementarVitorias() {
-        this.vitorias++;
-        
-        return this.vitorias;
-    }
+		this.rodadasJogadas++;
+		this.pontuacao += 3;
+
+		return this.vitorias++;
+	}
+
+	public int incrementaEmpates() {
+		this.pontuacao += 1;
+		this.rodadasJogadas++;
+
+		return this.empates++;
+	}
+
+	public int defineDerrota() {
+		return this.derrotas = rodadasJogadas - this.vitorias - this.empates;
+	}
 
 	public String getNome() {
 		return nome;
@@ -85,12 +97,14 @@ public class Time {
 		return golsMarcados - golsSofridos;
 	}
 
+	public int getEmpates() {
+		return this.empates;
+	}
+
 	@Override
 	public String toString() {
 		return "[nome=" + nome + ", rodadasJogadas=" + rodadasJogadas + ", pontuacao=" + pontuacao + ", vitorias="
 				+ vitorias + ", golsMarcados=" + golsMarcados + ", golsSofridos=" + golsSofridos + "]";
 	}
-	
-	
 
 }

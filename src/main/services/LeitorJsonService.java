@@ -13,10 +13,10 @@ import com.google.gson.reflect.TypeToken;
 
 import main.entities.Time;
 
-public class LerJsonService {
+public class LeitorJsonService {
 	private Gson gson;
 
-	public LerJsonService() {
+	public LeitorJsonService() {
 		gson = new Gson();
 	}
 

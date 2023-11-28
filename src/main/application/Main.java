@@ -1,10 +1,14 @@
 package main.application;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
+import main.entities.Partida;
 import main.entities.Tabela;
 import main.entities.Time;
-import main.services.LerJsonService;
+import main.services.LeitorJsonService;
 
 public class Main {
 
@@ -12,32 +16,58 @@ public class Main {
 
 	public static void main(String[] args) {
 		menu(tabela);
-		tabela.verTabela(); //printa a tabela oficial formatada 
+		tabela.verTabela(); // printa a tabela oficial formatada
 	}
 
 	public static void menu(Tabela tabela) {
-		LerJsonService lerJson = new LerJsonService();
+		LeitorJsonService lerJson = new LeitorJsonService();
 		Scanner in = new Scanner(System.in);
 
-		tabela.addTime(new Time("Grêmio", 40, 12));
-		tabela.addTime(new Time("Fluminense", 12, 3));
-		tabela.addTime(new Time("Atlético MG", 12, 4));
-		tabela.addTime(new Time("São Paulo", 25, 7));
-		tabela.addTime(new Time("Palmeiras", 23, 5));
-		tabela.addTime(new Time("Coritiba", 34, 8));
-		tabela.addTime(new Time("Bragantino", 34, 7));
-		tabela.addTime(new Time("Botafogo", 36, 10));
-		tabela.addTime(new Time("Juventude", 35, 12));
-		tabela.addTime(new Time("Brasil de Pelotas", 40, 10));
+		Time time1 = new Time("Grêmio");
+		Time time2 = new Time("Fluminense");
+		Time time3 = new Time("Atlético MG");
+		Time time4 = new Time("São Paulo");
+		Time time5 = new Time("Palmeiras");
+		Time time6 = new Time("Coritiba");
+		Time time7 = new Time("Bragantino");
+		Time time8 = new Time("Botafogo");
+		Time time9 = new Time("Juventude");
+		Time time10 = new Time("Brasil de Pelotas");
 
-		//imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo 
+		tabela.addTime(time1);
+		tabela.addTime(time2);
+		tabela.addTime(time3);
+		tabela.addTime(time4);
+		tabela.addTime(time5);
+		tabela.addTime(time6);
+		tabela.addTime(time7);
+		tabela.addTime(time8);
+		tabela.addTime(time9);
+		tabela.addTime(time10);
+
+		for (int i = 0; i < 11; i++) {
+			for (int j = i + 1; j < 11; j++) {
+				Partida partida = simulaPartida(tabela.retornaTimeDaTabela(i), tabela.retornaTimeDaTabela(j));
+				tabela.registraPartida(partida);
+			}
+		}
 
 	}
 
-	public static void imprimirTimes(LerJsonService lerJson, String path) {
+	public static Partida simulaPartida(Time timeCasa, Time timeVisitante) {
+
+		int golsCasa = (int) (Math.random() * 5);
+		int golsVisitante = (int) (Math.random() * 5);
+
+		return new Partida(timeCasa, timeVisitante, golsCasa, golsVisitante);
+	}
+
+	// imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo
+
+	public static void imprimirTimes(LeitorJsonService lerJson, String path) {
 		for (Time time : lerJson.lerListaDeTimes(path)) {
 			System.out.println("Time: " + time + "\n");
-			
-		} //teste pra printar o json -> não está formatado
+
+		} // teste pra printar o json -> não está formatado
 	}
 }
