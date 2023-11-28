@@ -32,7 +32,7 @@ public class Tabela {
 
 	    System.out.printf("%-20s | %-15s | %-10s | %-10s | %-10s | %-10s | %-15s | %-15s | %-15s | %-20s%n", "Time",
 	            "Pontuação", "Vitórias", "Empates", "Derrotas", "Saldo de Gols  ", "Gols Marcados", "Gols Sofridos",
-	            "Aproveitamento   ", "Rodadas Jogadas");
+	            "Aproveitamento   ", "Partidas Jogadas");
 	    System.out.println(
 	            "----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
