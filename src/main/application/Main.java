@@ -1,8 +1,5 @@
 package main.application;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 import main.entities.Partida;
@@ -16,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		menu(tabela);
-		tabela.verTabela(); // printa a tabela oficial formatada
+		tabela.verTabela();
 	}
 
 	public static void menu(Tabela tabela) {
@@ -45,11 +42,24 @@ public class Main {
 		tabela.addTime(time9);
 		tabela.addTime(time10);
 
-		for (int i = 0; i < 11; i++) {
-			for (int j = i + 1; j < 11; j++) {
-				Partida partida = simulaPartida(tabela.retornaTimeDaTabela(i), tabela.retornaTimeDaTabela(j));
-				tabela.registraPartida(partida);
+		for (Time timeCasa : tabela.retornaListaDeTimes()) {
+			for (Time timeVisitante : tabela.retornaListaDeTimes()) {
+				if (timeCasa != timeVisitante) {
+
+					if (timeCasa.getRodadasJogadas() < 17 && timeVisitante.getRodadasJogadas() < 17) {
+						Partida partida1 = simulaPartida(timeCasa, timeVisitante);
+						Partida partida2 = simulaPartida(timeVisitante, timeCasa);
+
+						tabela.registraPartida(partida1);
+						tabela.registraPartida(partida2);
+					}
+
+				}
 			}
+		}
+
+		for (Time time : tabela.retornaListaDeTimes()) {
+			time.incrementaRodadasJogadas();
 		}
 
 	}
@@ -68,6 +78,6 @@ public class Main {
 		for (Time time : lerJson.lerListaDeTimes(path)) {
 			System.out.println("Time: " + time + "\n");
 
-		} // teste pra printar o json -> não está formatado
+		}
 	}
 }

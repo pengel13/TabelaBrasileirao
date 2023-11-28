@@ -16,13 +16,7 @@ public class Rodada {
 		this.partida3 = partida3;
 		this.partida4 = partida4;
 		this.partida5 = partida5;
-		
-		partida1.defineVencedor();
-		partida2.defineVencedor();
-		partida3.defineVencedor();
-		partida4.defineVencedor();
-		partida5.defineVencedor();
-		
+
 	}
 
 	public int getNumeroRodada() {

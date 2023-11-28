@@ -19,19 +19,21 @@ public class Partida {
 	}
 
 	public Time defineVencedor() {
-		if (golsCasa == golsVisitante) {
-			timeCasa.incrementaEmpates();
-			timeVisitante.incrementaEmpates();
-			return null;
-		} else if (golsCasa > golsVisitante) {
-			timeCasa.incrementarVitorias();
-			return timeCasa;
+	    if (golsCasa == golsVisitante) {
+	        timeCasa.incrementaEmpates(golsCasa, golsVisitante);
+	        timeVisitante.incrementaEmpates(golsVisitante, golsCasa);
+	    } else if (golsCasa > golsVisitante) {
+	        timeCasa.incrementarVitorias(golsCasa, golsVisitante);
+	    } else {
+	        timeVisitante.incrementarVitorias(golsVisitante, golsCasa);
+	    }
 
-		} else {
-			timeVisitante.incrementarVitorias();
-			return timeVisitante;
-		}
+	    timeCasa.incrementaRodadasJogadas();
+	    timeVisitante.incrementaRodadasJogadas();
+
+	    return null;
 	}
+
 
 	public int validaInt(int valor) {
 		try {

@@ -27,22 +27,30 @@ public class Time {
 		this.vitorias = 0;
 	}
 
-	public int incrementarVitorias() {
-		this.rodadasJogadas++;
+	public void incrementaEmpates(int golsFeitos, int golsSofridos) {
+		this.empates++;
+		this.pontuacao++;
+		this.golsMarcados += golsFeitos;
+		this.golsSofridos += golsSofridos;
+	}
+
+	public void incrementarVitorias(int golsFeitos, int golsSofridos) {
+		this.vitorias++;
 		this.pontuacao += 3;
-
-		return this.vitorias++;
+		this.golsMarcados += golsFeitos;
+		this.golsSofridos += golsSofridos;
 	}
 
-	public int incrementaEmpates() {
-		this.pontuacao += 1;
-		this.rodadasJogadas++;
+	public int defineDerrota(int golsMarcados, int golsSofridos) {
+		this.golsMarcados += golsMarcados;
+		this.golsSofridos += golsSofridos;
+		this.derrotas = rodadasJogadas - this.vitorias - this.empates;
 
-		return this.empates++;
+		return this.derrotas;
 	}
 
-	public int defineDerrota() {
-		return this.derrotas = rodadasJogadas - this.vitorias - this.empates;
+	public int incrementaRodadasJogadas() {
+		return this.rodadasJogadas++;
 	}
 
 	public String getNome() {
@@ -99,6 +107,18 @@ public class Time {
 
 	public int getEmpates() {
 		return this.empates;
+	}
+
+	public int getDerrotas() {
+		return derrotas;
+	}
+
+	public void setDerrotas(int derrotas) {
+		this.derrotas = derrotas;
+	}
+
+	public void setEmpates(int empates) {
+		this.empates = empates;
 	}
 
 	@Override
