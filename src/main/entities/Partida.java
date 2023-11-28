@@ -24,8 +24,10 @@ public class Partida {
 	        timeVisitante.incrementaEmpates(golsVisitante, golsCasa);
 	    } else if (golsCasa > golsVisitante) {
 	        timeCasa.incrementarVitorias(golsCasa, golsVisitante);
+	        timeVisitante.incrementaDerrotas(golsVisitante, golsCasa);
 	    } else {
 	        timeVisitante.incrementarVitorias(golsVisitante, golsCasa);
+	        timeCasa.incrementaDerrotas(golsCasa, golsVisitante);
 	    }
 
 	    timeCasa.incrementaRodadasJogadas();
@@ -33,6 +35,7 @@ public class Partida {
 
 	    return null;
 	}
+
 
 
 	public int validaInt(int valor) {
@@ -79,4 +82,11 @@ public class Partida {
 	public void setGolsVisitante(int golsVisitante) {
 		this.golsVisitante = golsVisitante;
 	}
+
+	@Override
+	public String toString() {
+		return "Partida [timeCasa=" + timeCasa + ", timeVisitante=" + timeVisitante + ", golsCasa=" + golsCasa
+				+ ", golsVisitante=" + golsVisitante + "]\n";
+	}
+	
 }

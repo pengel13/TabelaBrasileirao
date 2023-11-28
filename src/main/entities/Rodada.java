@@ -1,7 +1,11 @@
 package main.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rodada {
 	private int numeroRodada;
+	private List<Partida> listasDePartidasPorTime;
 	private Partida partida1, partida2, partida3, partida4, partida5;
 
 	public Rodada() {
@@ -10,13 +14,29 @@ public class Rodada {
 
 	public Rodada(int numeroRodada, Partida partida1, Partida partida2, Partida partida3, Partida partida4,
 			Partida partida5) {
-		this.numeroRodada = numeroRodada;
 		this.partida1 = partida1;
 		this.partida2 = partida2;
 		this.partida3 = partida3;
 		this.partida4 = partida4;
 		this.partida5 = partida5;
+	}
 
+	public Rodada(int numeroRodada) {
+		this.numeroRodada = numeroRodada;
+		listasDePartidasPorTime = new ArrayList<Partida>();
+
+		Tabela.incrementaRodadasJogadasNoCampeonato();
+
+	}
+
+	public boolean addPartida(Partida partida) {
+		this.listasDePartidasPorTime.add(partida);
+
+		return true;
+	}
+
+	public List<Partida> getListasDePartidasPorTime() {
+		return listasDePartidasPorTime;
 	}
 
 	public int getNumeroRodada() {
@@ -66,4 +86,10 @@ public class Rodada {
 	public void setPartida5(Partida partida5) {
 		this.partida5 = partida5;
 	}
+
+	@Override
+	public String toString() {
+		return "Rodada [numeroRodada=" + numeroRodada + ", listasDePartidas=" + listasDePartidasPorTime + "]";
+	}
+
 }

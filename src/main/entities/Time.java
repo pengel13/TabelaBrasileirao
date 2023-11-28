@@ -41,13 +41,11 @@ public class Time {
 		this.golsSofridos += golsSofridos;
 	}
 
-	public int defineDerrota(int golsMarcados, int golsSofridos) {
-		this.golsMarcados += golsMarcados;
-		this.golsSofridos += golsSofridos;
-		this.derrotas = rodadasJogadas - this.vitorias - this.empates;
-
-		return this.derrotas;
-	}
+	public void incrementaDerrotas(int golsMarcados, int golsSofridos) {
+        this.derrotas++;
+        this.golsMarcados += golsMarcados;
+        this.golsSofridos += golsSofridos;
+    }
 
 	public int incrementaRodadasJogadas() {
 		return this.rodadasJogadas++;
@@ -62,12 +60,19 @@ public class Time {
 	}
 
 	public int getRodadasJogadas() {
-		return rodadasJogadas;
+		return rodadasJogadas - 1;
 	}
 
 	public void setRodadasJogadas(int rodadasJogadas) {
 		this.rodadasJogadas = rodadasJogadas;
 	}
+	
+	public double getPercentualAproveitamento() {
+        if (rodadasJogadas == 0) {
+            return 0.0;
+        }
+        return (double) pontuacao / (rodadasJogadas * 3) * 100;
+    }
 
 	public int getPontuacao() {
 		return pontuacao;
@@ -123,8 +128,7 @@ public class Time {
 
 	@Override
 	public String toString() {
-		return "[nome=" + nome + ", rodadasJogadas=" + rodadasJogadas + ", pontuacao=" + pontuacao + ", vitorias="
-				+ vitorias + ", golsMarcados=" + golsMarcados + ", golsSofridos=" + golsSofridos + "]";
+		return "[nome=" + nome + "]";
 	}
 
 }

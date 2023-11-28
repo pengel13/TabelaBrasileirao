@@ -3,23 +3,83 @@ package main.application;
 import java.util.Scanner;
 
 import main.entities.Partida;
+import main.entities.Rodada;
 import main.entities.Tabela;
 import main.entities.Time;
 import main.services.LeitorJsonService;
 
 public class Main {
 
-	private static Tabela tabela = new Tabela();
+	private static Tabela tabelaPronta = new Tabela();
+	private static Tabela tabelaNova = new Tabela();
+	private static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		menu(tabela);
-		tabela.verTabela();
+		menu();
+
+		in.close();
 	}
 
-	public static void menu(Tabela tabela) {
-		LeitorJsonService lerJson = new LeitorJsonService();
-		Scanner in = new Scanner(System.in);
+	public static void menu() {
+		System.out.println("...TABELA BRASILEIRÃO (10 TIMES)...");
+		System.out.println();
+		System.out.println(
+				"Qual ação deseja fazer:\n 1 - Configurar uma tabela desde o início\n 2 - Ver tabela pronta com simulação\n 3 - Inserir times e pontuações através de arquivo JSON");
+		int opcao = in.nextInt();
 
+		switch (opcao) {
+		case 1:
+			montarTabela();
+			break;
+		case 2:
+			System.out.println();
+			System.out.println("...Simulando jogos...");
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			configuraTimes();
+			menuDeSimulacaoDePartidas();
+			tabelaPronta.verTabela();
+			break;
+		case 3:
+			arquivoJsonMenu();
+		}
+
+	}
+
+	public static void arquivoJsonMenu() {
+		System.out.println(
+				"Digite o caminho para o arquivo: (Caso não tenha, pressione enter que carregaremos um de exemplo) ");
+		in.nextLine();
+		String path = in.nextLine();
+
+		if (path.isEmpty()) {
+			path = "./resources/times.json";
+		}
+
+		imprimirTimes(path);
+	}
+
+	public static void montarTabela() {
+		System.out.println("Quantos times quer adicionar");
+		int opcao = in.nextInt();
+
+		for (int i = 0; i < opcao; i++) {
+			System.out.println("Time " + i + ": ");
+			String nomeDoTime = in.nextLine();
+
+			Time time = new Time(nomeDoTime);
+
+			tabelaNova.addTime(time);
+
+		}
+	}
+
+	public static void configuraTimes() {
 		Time time1 = new Time("Grêmio");
 		Time time2 = new Time("Fluminense");
 		Time time3 = new Time("Atlético MG");
@@ -31,35 +91,43 @@ public class Main {
 		Time time9 = new Time("Juventude");
 		Time time10 = new Time("Brasil de Pelotas");
 
-		tabela.addTime(time1);
-		tabela.addTime(time2);
-		tabela.addTime(time3);
-		tabela.addTime(time4);
-		tabela.addTime(time5);
-		tabela.addTime(time6);
-		tabela.addTime(time7);
-		tabela.addTime(time8);
-		tabela.addTime(time9);
-		tabela.addTime(time10);
+		tabelaPronta.addTime(time1);
+		tabelaPronta.addTime(time2);
+		tabelaPronta.addTime(time3);
+		tabelaPronta.addTime(time4);
+		tabelaPronta.addTime(time5);
+		tabelaPronta.addTime(time6);
+		tabelaPronta.addTime(time7);
+		tabelaPronta.addTime(time8);
+		tabelaPronta.addTime(time9);
+		tabelaPronta.addTime(time10);
+	}
 
-		for (Time timeCasa : tabela.retornaListaDeTimes()) {
-			for (Time timeVisitante : tabela.retornaListaDeTimes()) {
-				if (timeCasa != timeVisitante) {
+	public static void menuDeSimulacaoDePartidas() {
+		int numeroRodada = 0;
 
-					if (timeCasa.getRodadasJogadas() < 17 && timeVisitante.getRodadasJogadas() < 17) {
-						Partida partida1 = simulaPartida(timeCasa, timeVisitante);
-						Partida partida2 = simulaPartida(timeVisitante, timeCasa);
+		for (int i = 0; i < 10; i++) {
+			Rodada rodada = new Rodada(++numeroRodada);
+			Time timeCasa = tabelaPronta.retornaTimeDaTabela(i);
 
-						tabela.registraPartida(partida1);
-						tabela.registraPartida(partida2);
-					}
+			for (int j = 1; j <= 5; j++) {
+				Time timeVisitante = tabelaPronta.retornaTimeDaTabela((i + j) % 10);
 
-				}
+				Partida partida = simulaPartida(timeCasa, timeVisitante);
+				rodada.addPartida(partida);
+
+				tabelaPronta.registraPartida(partida);
+				Tabela.incrementaRodadasJogadasNoCampeonato();
 			}
-		}
 
-		for (Time time : tabela.retornaListaDeTimes()) {
-			time.incrementaRodadasJogadas();
+			timeCasa.incrementaRodadasJogadas();
+
+			tabelaPronta.adicionaRodadaNaLista(rodada);
+
+			System.out.println();
+			System.out.println("Lista de partidas do " + timeCasa.getNome() + " em casa:");
+			System.out.println(rodada.getListasDePartidasPorTime());
+			System.out.println();
 		}
 
 	}
@@ -72,9 +140,8 @@ public class Main {
 		return new Partida(timeCasa, timeVisitante, golsCasa, golsVisitante);
 	}
 
-	// imprimirTimes(lerJson, "./resources/times.json"); //lista de 10 times exemplo
-
-	public static void imprimirTimes(LeitorJsonService lerJson, String path) {
+	public static void imprimirTimes(String path) {
+		LeitorJsonService lerJson = new LeitorJsonService();
 		for (Time time : lerJson.lerListaDeTimes(path)) {
 			System.out.println("Time: " + time + "\n");
 
