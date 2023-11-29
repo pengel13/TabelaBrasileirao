@@ -1,0 +1,102 @@
+[
+    {
+        "nome": "Grêmio",
+        "rodadasJogadas": 9,
+        "pontuacao": 12,
+        "vitorias": 3,
+        "empates": 3,
+        "derrotas": 2,
+        "golsMarcados": 25,
+        "golsSofridos": 17
+    },
+    {
+        "nome": "Fluminense",
+        "rodadasJogadas": 9,
+        "pontuacao": 12,
+        "vitorias": 3,
+        "empates": 3,
+        "derrotas": 2,
+        "golsMarcados": 15,
+        "golsSofridos": 13
+    },
+    {
+        "nome": "Atlético MG",
+        "rodadasJogadas": 9,
+        "pontuacao": 9,
+        "vitorias": 2,
+        "empates": 3,
+        "derrotas": 3,
+        "golsMarcados": 19,
+        "golsSofridos": 18
+    },
+    {
+        "nome": "São Paulo",
+        "rodadasJogadas": 9,
+        "pontuacao": 5,
+        "vitorias": 1,
+        "empates": 2,
+        "derrotas": 5,
+        "golsMarcados": 9,
+        "golsSofridos": 16
+    },
+    {
+        "nome": "Palmeiras",
+        "rodadasJogadas": 9,
+        "pontuacao": 5,
+        "vitorias": 1,
+        "empates": 2,
+        "derrotas": 5,
+        "golsMarcados": 10,
+        "golsSofridos": 21
+    },
+    {
+        "nome": "Coritiba",
+        "rodadasJogadas": 9,
+        "pontuacao": 12,
+        "vitorias": 3,
+        "empates": 3,
+        "derrotas": 2,
+        "golsMarcados": 12,
+        "golsSofridos": 12
+    },
+    {
+        "nome": "Bragantino",
+        "rodadasJogadas": 9,
+        "pontuacao": 6,
+        "vitorias": 1,
+        "empates": 3,
+        "derrotas": 4,
+        "golsMarcados": 13,
+        "golsSofridos": 19
+    },
+    {
+        "nome": "Botafogo",
+        "rodadasJogadas": 9,
+        "pontuacao": 15,
+        "vitorias": 4,
+        "empates": 3,
+        "derrotas": 1,
+        "golsMarcados": 21,
+        "golsSofridos": 15
+    },
+    {
+        "nome": "Juventude",
+        "rodadasJogadas": 9,
+        "pontuacao": 15,
+        "vitorias": 5,
+        "empates": 0,
+        "derrotas": 3,
+        "golsMarcados": 21,
+        "golsSofridos": 20
+    },
+    {
+        "nome": "Brasil de Pelotas",
+        "rodadasJogadas": 9,
+        "pontuacao": 18,
+        "vitorias": 6,
+        "empates": 0,
+        "derrotas": 2,
+        "golsMarcados": 20,
+        "golsSofridos": 14
+    }
+]

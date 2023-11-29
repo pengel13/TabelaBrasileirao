@@ -82,6 +82,10 @@ public class Tabela {
 
 		return time;
 	}
+	
+	public PriorityQueue<Time> getTabelaPriorityQueue() {
+		return tabela;
+	}
 
 	public boolean registraPartida(Partida partida) {
 

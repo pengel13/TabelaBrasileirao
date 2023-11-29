@@ -6,6 +6,7 @@ import main.entities.Partida;
 import main.entities.Rodada;
 import main.entities.Tabela;
 import main.entities.Time;
+import main.services.EscritorJsonService;
 import main.services.LeitorJsonService;
 
 public class Main {
@@ -43,6 +44,18 @@ public class Main {
 
 			configuraTimes();
 			menuDeSimulacaoDePartidas();
+			EscritorJsonService escritorJson = new EscritorJsonService(tabelaPronta.getTabelaPriorityQueue());
+
+			System.out.println("Deja salvar a tabela em um arquivo JSON? (Sim/Não)");
+			in.nextLine();
+			String salvarEmJsonOpcao = in.nextLine();
+
+			if (salvarEmJsonOpcao.equalsIgnoreCase("Sim")) {
+				System.out.println();
+				escritorJson.escreverTabelaNoJson("tabelaJson.json");
+				System.out.println();
+			}
+
 			tabelaPronta.verTabela();
 			break;
 		case 3:
@@ -77,8 +90,9 @@ public class Main {
 			Time time = new Time(nomeDoTime);
 
 			tabelaNova.addTime(time);
-
 		}
+
+		System.out.println("");
 	}
 
 	public static void configuraTimes() {
@@ -121,7 +135,7 @@ public class Main {
 
 					tabelaPronta.registraPartida(partida);
 					Tabela.incrementaRodadasJogadasNoCampeonato();
-					
+
 				}
 
 			}
