@@ -47,6 +47,7 @@ public class Main {
 			break;
 		case 3:
 			arquivoJsonMenu();
+			break;
 		}
 
 	}
@@ -58,6 +59,7 @@ public class Main {
 		String path = in.nextLine();
 
 		if (path.isEmpty()) {
+			System.out.println("Puxando de './resources/times.json'...");
 			path = "./resources/times.json";
 		}
 
@@ -110,14 +112,18 @@ public class Main {
 			Rodada rodada = new Rodada(++numeroRodada);
 			Time timeCasa = tabelaPronta.retornaTimeDaTabela(i);
 
-			for (int j = 1; j <= 5; j++) {
+			for (int j = 1; j <= 4; j++) {
 				Time timeVisitante = tabelaPronta.retornaTimeDaTabela((i + j) % 10);
 
-				Partida partida = simulaPartida(timeCasa, timeVisitante);
-				rodada.addPartida(partida);
+				if (!timeCasa.equals(timeVisitante)) {
+					Partida partida = simulaPartida(timeCasa, timeVisitante);
+					rodada.addPartida(partida);
 
-				tabelaPronta.registraPartida(partida);
-				Tabela.incrementaRodadasJogadasNoCampeonato();
+					tabelaPronta.registraPartida(partida);
+					Tabela.incrementaRodadasJogadasNoCampeonato();
+					
+				}
+
 			}
 
 			timeCasa.incrementaRodadasJogadas();

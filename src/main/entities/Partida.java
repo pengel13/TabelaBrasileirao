@@ -18,7 +18,7 @@ public class Partida {
 		this.golsVisitante = validaInt(golsVisitante);
 	}
 
-	public Time defineVencedor() {
+	public void defineVencedor() {
 	    if (golsCasa == golsVisitante) {
 	        timeCasa.incrementaEmpates(golsCasa, golsVisitante);
 	        timeVisitante.incrementaEmpates(golsVisitante, golsCasa);
@@ -33,7 +33,6 @@ public class Partida {
 	    timeCasa.incrementaRodadasJogadas();
 	    timeVisitante.incrementaRodadasJogadas();
 
-	    return null;
 	}
 
 

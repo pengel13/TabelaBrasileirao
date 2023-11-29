@@ -48,9 +48,6 @@ public class Tabela {
 
 
 
-
-
-
 	public boolean addTime(Time time) {
 		tabela.add(time);
 
