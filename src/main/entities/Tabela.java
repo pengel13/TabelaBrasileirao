@@ -36,16 +36,8 @@ public class Tabela {
 	public void verTabela() {
 		List<Time> listaDeTimes = new ArrayList<>(tabela);
 
-		List<Time> listaOrdenada = formatarTabela(listaDeTimes);
+		formatarTabela(listaDeTimes);
 
-		for (Time time : listaOrdenada) {
-			System.out.printf("%-20s | %-15s | %-10d | %-10d | %-10d | %-15d | %-15d | %-15d | %-18.2f | %-20d%n",
-					time.getNome(), time.getPontuacao(), time.getVitorias(), time.getEmpates(), time.getDerrotas(),
-					time.getSaldoGols(), time.getGolsMarcados(), time.getGolsSofridos(),
-					time.getPercentualAproveitamento(), time.getRodadasJogadas() - 1);
-		}
-
-		System.out.println();
 	}
 
 	/**
@@ -55,14 +47,7 @@ public class Tabela {
 	 */
 	public void printarListaComFormatoDeTabela(List<Time> listaDeTimes) {
 
-		List<Time> listaOrdenada = formatarTabela(listaDeTimes);
-
-		for (Time time : listaOrdenada) {
-			System.out.printf("%-20s | %-15s | %-10d | %-10d | %-10d | %-15d | %-15d | %-15d | %-18.2f | %-20d%n",
-					time.getNome(), time.getPontuacao(), time.getVitorias(), time.getEmpates(), time.getDerrotas(),
-					time.getSaldoGols(), time.getGolsMarcados(), time.getGolsSofridos(),
-					time.getPercentualAproveitamento(), time.getRodadasJogadas());
-		}
+		formatarTabela(listaDeTimes);
 
 		System.out.println();
 	}
@@ -73,7 +58,7 @@ public class Tabela {
 	 * @param listaDeTimes Lista de times a ser formatada.
 	 * @return Lista de times formatada.
 	 */
-	private List<Time> formatarTabela(List<Time> listaDeTimes) {
+	private void formatarTabela(List<Time> listaDeTimes) {
 		Collections.sort(listaDeTimes, numeroDePontosComparator.thenComparing(numeroDeVitoriasComparator)
 				.thenComparing(saldoDeGolsComparator));
 
@@ -83,7 +68,14 @@ public class Tabela {
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-		return listaDeTimes;
+		for (Time time : listaDeTimes) {
+			System.out.printf("%-20s | %-15s | %-10d | %-10d | %-10d | %-15d | %-15d | %-15d | %-18.2f | %-20d%n",
+					time.getNome(), time.getPontuacao(), time.getVitorias(), time.getEmpates(), time.getDerrotas(),
+					time.getSaldoGols(), time.getGolsMarcados(), time.getGolsSofridos(),
+					time.getPercentualAproveitamento(), time.getRodadasJogadas());
+		}
+
+		System.out.println();
 	}
 
 	public boolean addTime(Time time) {

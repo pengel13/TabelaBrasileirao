@@ -69,7 +69,7 @@ public class Time {
     }
 
 	public int incrementaRodadasJogadas() {
-		return this.rodadasJogadas++;
+		return this.rodadasJogadas += 1;
 	}
 
 	public String getNome() {

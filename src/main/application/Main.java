@@ -134,7 +134,6 @@ public class Main {
 				}
 			}
 
-			timeCasa.incrementaRodadasJogadas();
 			tabelaNova.adicionaRodadaNaLista(rodada);
 		}
 
@@ -196,8 +195,6 @@ public class Main {
 				}
 
 			}
-
-			timeCasa.incrementaRodadasJogadas();
 
 			tabelaPronta.adicionaRodadaNaLista(rodada);
 
