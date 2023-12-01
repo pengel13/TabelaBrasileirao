@@ -55,8 +55,7 @@ public class Tabela {
 	/**
 	 * Formata uma lista de times como uma tabela.
 	 *
-	 * @param listaDeTimes Lista de times a ser formatada.
-	 * @return Lista de times formatada.
+	 * @param listaDeTimes Lista de times a ser formatada
 	 */
 	private void formatarTabela(List<Time> listaDeTimes) {
 		Collections.sort(listaDeTimes, numeroDePontosComparator.thenComparing(numeroDeVitoriasComparator)
