@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 
 import main.entities.Time;
 
+/*
+ * Serviço para escrever em um arquivo JSON utilizando a lib GSON
+ */
 public class EscritorJsonService {
 
 	private Gson gson;
@@ -18,6 +21,10 @@ public class EscritorJsonService {
 		gson = new Gson();
 	}
 
+	/**
+	 * 
+	 * @param fileName Nome do arquivo para não haver repetição e sobescrever o antigo
+	 */
 	public void escreverTabelaNoJson(String fileName) {
 		try (FileWriter fileWriter = new FileWriter("./resources/" + fileName)) {
 

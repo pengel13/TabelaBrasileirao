@@ -14,15 +14,26 @@ public class Main {
 	private static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		try {
-			menu();
-		} catch (RuntimeException e) {
-			System.out.println("Error: " + e.getMessage());
-		}
+		boolean valida = false;
+
+		do {
+			try {
+				menu();
+				valida = true; // Define true se o menu for concluido
+			} catch (RuntimeException e) { // Exceção em tempo de execução
+				System.out.println("Mensagem: Digite um valor válido");
+				System.out.println("Error: " + e.getMessage());
+				in.nextLine();
+			}
+
+			System.out.println();
+
+		} while (!valida);
 
 		in.close();
 	}
 
+	// menu com as opções
 	public static void menu() {
 		System.out.println("...TABELA BRASILEIRÃO (10 TIMES)...");
 		System.out.println();
@@ -45,7 +56,7 @@ public class Main {
 				System.out.println();
 				System.out.println("...Simulando jogos...");
 
-				try {
+				try { // simula carregamento das partidas
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -65,6 +76,7 @@ public class Main {
 		System.out.println("Saindo...");
 	}
 
+	// Menu para printar o arquivo JSON do usuário
 	public static void arquivoJsonMenu() {
 		System.out.println(
 				"Digite o caminho para o arquivo: (Caso não tenha, pressione enter que carregaremos um de exemplo) ");
@@ -85,7 +97,7 @@ public class Main {
 		System.out.print("Quantos times quer adicionar: ");
 		int opcao = in.nextInt();
 
-		in.nextLine();
+		in.nextLine(); // Limpa buffer
 		for (int i = 0; i < opcao; i++) {
 			System.out.print("Time " + (i + 1) + ": ");
 			String nomeDoTime = in.nextLine();
@@ -102,7 +114,7 @@ public class Main {
 		int numeroRodada = 0;
 
 		for (int i = 0; i < tabelaNova.getTabelaPriorityQueue().size(); i++) {
-			Rodada rodada = new Rodada(++numeroRodada);
+			Rodada rodada = new Rodada(++numeroRodada); // Numero de rodadas = (Numero de times * 2) - 2
 			Time timeCasa = tabelaNova.retornaTimeDaTabela(i);
 
 			for (int j = 0; j < tabelaNova.getTabelaPriorityQueue().size(); j++) {
@@ -110,7 +122,7 @@ public class Main {
 					Time timeVisitante = tabelaNova.retornaTimeDaTabela(j);
 
 					System.out.print(timeCasa.getNome() + " x " + timeVisitante.getNome() + ": ");
-					String[] placar = (in.nextLine()).split("x");
+					String[] placar = (in.nextLine()).split("x"); // Filtrar o placar removendo o "x"
 					int placarCasa = Integer.parseInt(placar[0]);
 					int placarVisitante = Integer.parseInt(placar[1]);
 
@@ -118,7 +130,7 @@ public class Main {
 
 					rodada.addPartida(partida);
 					tabelaNova.registraPartida(partida);
-					Tabela.incrementaRodadasJogadasNoCampeonato();
+
 				}
 			}
 
@@ -145,6 +157,7 @@ public class Main {
 
 	}
 
+	// Adiciona 10 times na tabela que será usada na simulação
 	public static void configuraTimes(Tabela tabelaPronta) {
 		tabelaPronta.addTime(new Time("Grêmio"));
 		tabelaPronta.addTime(new Time("Fluminense"));
@@ -161,19 +174,24 @@ public class Main {
 	public static void menuDeSimulacaoDePartidas(Tabela tabelaPronta) {
 		int numeroRodada = 0;
 
+		/*
+		 * Logica com estrutura de repetição para percorrer todos os times cadastrados
+		 * na tabela e simular resultados
+		 */
 		for (int i = 0; i < 10; i++) {
 			Rodada rodada = new Rodada(++numeroRodada);
 			Time timeCasa = tabelaPronta.retornaTimeDaTabela(i);
 
 			for (int j = 1; j <= 10; j++) {
-				Time timeVisitante = tabelaPronta.retornaTimeDaTabela((i + j) % 10);
+				Time timeVisitante = tabelaPronta.retornaTimeDaTabela((i + j) % 10); // Percorre por todos os times da
+																						// tabela
 
 				if (!timeCasa.equals(timeVisitante)) {
 					Partida partida = simulaPartida(timeCasa, timeVisitante);
 					rodada.addPartida(partida);
 
-					tabelaPronta.registraPartida(partida);
-					Tabela.incrementaRodadasJogadasNoCampeonato();
+					tabelaPronta.registraPartida(partida); // Registra partida simulada definindo vendedor e atualizando
+															// pontos
 
 				}
 
@@ -207,6 +225,7 @@ public class Main {
 
 	}
 
+	// Simula a criação de uma partida
 	public static Partida simulaPartida(Time timeCasa, Time timeVisitante) {
 
 		int golsCasa = (int) (Math.random() * 5);
@@ -215,6 +234,7 @@ public class Main {
 		return new Partida(timeCasa, timeVisitante, golsCasa, golsVisitante);
 	}
 
+	// Método para printar os times de um arquivo JSON recebido como parâmetro
 	public static void imprimirTimes(String path) {
 		Tabela tabela = new Tabela();
 		LeitorJsonService lerJson = new LeitorJsonService();

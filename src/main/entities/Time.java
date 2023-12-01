@@ -1,5 +1,7 @@
 package main.entities;
-
+/**
+ * Representa os atributos de cada time 
+ */
 public class Time {
 
 	private String nome;
@@ -26,6 +28,13 @@ public class Time {
 		this.golsSofridos = 0;
 		this.vitorias = 0;
 	}
+	
+	/**
+	 * Registra um empate para o time
+	 * 
+	 * @param golsFeitos 
+	 * @param golsSofridos
+	 */
 
 	public void incrementaEmpates(int golsFeitos, int golsSofridos) {
 		this.empates++;
@@ -33,7 +42,13 @@ public class Time {
 		this.golsMarcados += golsFeitos;
 		this.golsSofridos += golsSofridos;
 	}
-
+	
+	/**
+	 * Registra uma vitoria pro time
+	 * 
+	 * @param golsFeitos
+	 * @param golsSofridos
+	 */
 	public void incrementarVitorias(int golsFeitos, int golsSofridos) {
 		this.vitorias++;
 		this.pontuacao += 3;
@@ -41,6 +56,12 @@ public class Time {
 		this.golsSofridos += golsSofridos;
 	}
 
+	/**
+	 * Registra uma derrota 
+	 * 
+	 * @param golsMarcados
+	 * @param golsSofridos
+	 */
 	public void incrementaDerrotas(int golsMarcados, int golsSofridos) {
         this.derrotas++;
         this.golsMarcados += golsMarcados;
@@ -60,13 +81,17 @@ public class Time {
 	}
 
 	public int getRodadasJogadas() {
-		return rodadasJogadas - 1;
+		return rodadasJogadas;
 	}
 
 	public void setRodadasJogadas(int rodadasJogadas) {
 		this.rodadasJogadas = rodadasJogadas;
 	}
 	
+	/**
+	 * 
+	 * @return Saldo de gols
+	 */
 	public double getPercentualAproveitamento() {
         if (rodadasJogadas == 0) {
             return 0.0;

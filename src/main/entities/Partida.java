@@ -2,6 +2,10 @@ package main.entities;
 
 import main.exceptions.DomainException;
 
+/*
+ * Atributos de uma partida de futebol 
+ *
+ */
 public class Partida {
 	private Time timeCasa;
 	private Time timeVisitante;
@@ -18,6 +22,9 @@ public class Partida {
 		this.golsVisitante = validaInt(golsVisitante);
 	}
 
+	/*
+	 *Define resultado da partida comparando o numero de gols 
+	 */
 	public void defineVencedor() {
 	    if (golsCasa == golsVisitante) {
 	        timeCasa.incrementaEmpates(golsCasa, golsVisitante);
@@ -36,7 +43,11 @@ public class Partida {
 	}
 
 
-
+	/**
+	 * 
+	 * @param valor Inteiro para validar
+	 * @return Retorna se é valido ou não
+	 */
 	public int validaInt(int valor) {
 		try {
 			if (valor < 0) {

@@ -11,14 +11,21 @@ public class Rodada {
 
 	}
 
+	/**
+	 * Registra o numero da rodada e intancia a lista das partidas da Rodada
+	 * @param numeroRodada
+	 */
 	public Rodada(int numeroRodada) {
 		this.numeroRodada = numeroRodada;
 		listaRodada = new ArrayList<Partida>();
 
-		Tabela.incrementaRodadasJogadasNoCampeonato();
-
 	}
 
+	/**
+	 * 
+	 * @param partida Partida para adicionar
+	 * @return Retorna true para sucesso
+	 */
 	public boolean addPartida(Partida partida) {
 		this.listaRodada.add(partida);
 
@@ -36,6 +43,7 @@ public class Rodada {
 	public void setNumeroRodada(int numeroRodada) {
 		this.numeroRodada = numeroRodada;
 	}
+
 	@Override
 	public String toString() {
 		return "Rodada [numeroRodada=" + numeroRodada + ", listaRodada=" + listaRodada + "]";

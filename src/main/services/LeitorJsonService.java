@@ -14,12 +14,20 @@ import com.google.gson.reflect.TypeToken;
 
 import main.entities.Time;
 
+/*
+ * Serviço para ler um arquivo JSON utilizando a lib GSON
+ */
 public class LeitorJsonService {
 
 	public LeitorJsonService() {
 
 	}
 
+	/**
+	 * Utiliza GSOn para ler uma lista de objetos em JSON
+	 * @param path Caminho para o arquivo 
+	 * @return Lista de times 
+	 */
 	public List<Time> lerListaDeTimes(String path) {
 		try {
 			if (!verificaPath(path)) {
@@ -43,6 +51,11 @@ public class LeitorJsonService {
 		}
 	}
 
+	/**
+	 * Verica se o path é valido utilzando a class Path
+	 * @param path Caminho para verificar
+	 * @return True para caminho correto
+	 */
 	public boolean verificaPath(String path) {
 		Path file = Paths.get(path);
 		return Files.exists(file) && Files.isRegularFile(file) && path.endsWith(".json");
