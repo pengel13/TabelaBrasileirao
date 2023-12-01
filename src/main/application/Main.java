@@ -14,12 +14,12 @@ public class Main {
 	private static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		boolean valida = false;
+		boolean menuEValido = false;
 
 		do {
 			try {
 				menu();
-				valida = true; // Define true se o menu for concluido
+				menuEValido = true; // Define true se o menu for concluido
 			} catch (RuntimeException e) { // Exceção em tempo de execução
 				System.out.println("Mensagem: Digite um valor válido");
 				System.out.println("Error: " + e.getMessage());
@@ -28,14 +28,14 @@ public class Main {
 
 			System.out.println();
 
-		} while (!valida);
+		} while (!menuEValido);
 
 		in.close();
 	}
 
 	// menu com as opções
 	public static void menu() {
-		System.out.println("...TABELA BRASILEIRÃO (10 TIMES)...");
+		System.out.println("...TABELA BRASILEIRÃO...");
 		System.out.println();
 
 		int opcao = 0;
