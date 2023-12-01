@@ -5,8 +5,7 @@ import java.util.List;
 
 public class Rodada {
 	private int numeroRodada;
-	private List<Partida> listasDePartidasPorTime;
-	private Partida partida1, partida2, partida3, partida4, partida5;
+	private List<Partida> listaRodada;
 
 	public Rodada() {
 
@@ -14,20 +13,20 @@ public class Rodada {
 
 	public Rodada(int numeroRodada) {
 		this.numeroRodada = numeroRodada;
-		listasDePartidasPorTime = new ArrayList<Partida>();
+		listaRodada = new ArrayList<Partida>();
 
 		Tabela.incrementaRodadasJogadasNoCampeonato();
 
 	}
 
 	public boolean addPartida(Partida partida) {
-		this.listasDePartidasPorTime.add(partida);
+		this.listaRodada.add(partida);
 
 		return true;
 	}
 
-	public List<Partida> getListasDePartidasPorTime() {
-		return listasDePartidasPorTime;
+	public List<Partida> getListaRodada() {
+		return listaRodada;
 	}
 
 	public int getNumeroRodada() {
@@ -37,50 +36,9 @@ public class Rodada {
 	public void setNumeroRodada(int numeroRodada) {
 		this.numeroRodada = numeroRodada;
 	}
-
-	public Partida getPartida1() {
-		return partida1;
-	}
-
-	public void setPartida1(Partida partida1) {
-		this.partida1 = partida1;
-	}
-
-	public Partida getPartida2() {
-		return partida2;
-	}
-
-	public void setPartida2(Partida partida2) {
-		this.partida2 = partida2;
-	}
-
-	public Partida getPartida3() {
-		return partida3;
-	}
-
-	public void setPartida3(Partida partida3) {
-		this.partida3 = partida3;
-	}
-
-	public Partida getPartida4() {
-		return partida4;
-	}
-
-	public void setPartida4(Partida partida4) {
-		this.partida4 = partida4;
-	}
-
-	public Partida getPartida5() {
-		return partida5;
-	}
-
-	public void setPartida5(Partida partida5) {
-		this.partida5 = partida5;
-	}
-
 	@Override
 	public String toString() {
-		return "Rodada [numeroRodada=" + numeroRodada + ", listasDePartidas=" + listasDePartidasPorTime + "]";
+		return "Rodada [numeroRodada=" + numeroRodada + ", listaRodada=" + listaRodada + "]";
 	}
 
 }

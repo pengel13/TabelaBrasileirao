@@ -185,7 +185,7 @@ public class Main {
 
 			System.out.println();
 			System.out.println("Lista de partidas do " + timeCasa.getNome() + " em casa:");
-			System.out.println(rodada.getListasDePartidasPorTime());
+			System.out.println(rodada.getListaRodada());
 			System.out.println();
 		}
 
