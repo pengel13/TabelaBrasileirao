@@ -15,7 +15,7 @@ import main.comparators.SaldoDeGolsComparator;
 
 public class Tabela {
 	private PriorityQueue<Time> tabela;
-	private List<Time> listaDeRodadas = new ArrayList<Time>(); // Lista de rodadas do campeonato
+	private List<Rodada> listaDeRodadas = new ArrayList<Rodada>(); // Lista de rodadas do campeonato
 	private Comparator<Time> numeroDePontosComparator, numeroDeVitoriasComparator, saldoDeGolsComparator;
 
 	/*
@@ -31,8 +31,8 @@ public class Tabela {
 	}
 
 	/**
-     * Exibe a tabela formatada
-     */
+	 * Exibe a tabela formatada
+	 */
 	public void verTabela() {
 		List<Time> listaDeTimes = new ArrayList<>(tabela);
 
@@ -47,12 +47,12 @@ public class Tabela {
 
 		System.out.println();
 	}
-	
-	 /**
-     * Exibe uma lista de times formatada como uma tabela
-     *
-     * @param listaDeTimes Lista de times a ser formatada
-     */
+
+	/**
+	 * Exibe uma lista de times formatada como uma tabela
+	 *
+	 * @param listaDeTimes Lista de times a ser formatada
+	 */
 	public void printarListaComFormatoDeTabela(List<Time> listaDeTimes) {
 
 		List<Time> listaOrdenada = formatarTabela(listaDeTimes);
@@ -68,11 +68,11 @@ public class Tabela {
 	}
 
 	/**
-     * Formata uma lista de times como uma tabela.
-     *
-     * @param listaDeTimes Lista de times a ser formatada.
-     * @return Lista de times formatada.
-     */
+	 * Formata uma lista de times como uma tabela.
+	 *
+	 * @param listaDeTimes Lista de times a ser formatada.
+	 * @return Lista de times formatada.
+	 */
 	private List<Time> formatarTabela(List<Time> listaDeTimes) {
 		Collections.sort(listaDeTimes, numeroDePontosComparator.thenComparing(numeroDeVitoriasComparator)
 				.thenComparing(saldoDeGolsComparator));
@@ -121,7 +121,7 @@ public class Tabela {
 	public List<Time> retornaListaDeTimes() {
 		return new ArrayList<>(tabela);
 	}
-	
+
 	/**
 	 * Retorna o primeiro time da PriorityQueue
 	 * 
@@ -141,7 +141,6 @@ public class Tabela {
 		return tabela;
 	}
 
-	
 	/**
 	 * Registra uma partida na tabela adicionando na Queue
 	 * 
@@ -160,9 +159,13 @@ public class Tabela {
 	}
 
 	public boolean adicionaRodadaNaLista(Rodada rodada) {
-		this.listaDeRodadas.add(null);
+		this.listaDeRodadas.add(rodada);
 
 		return true;
+	}
+
+	public List<Rodada> getListaDeRodadas() {
+		return listaDeRodadas;
 	}
 
 }

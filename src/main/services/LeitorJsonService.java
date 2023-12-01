@@ -52,7 +52,7 @@ public class LeitorJsonService {
 	}
 
 	/**
-	 * Verica se o path é valido utilzando a class Path
+	 * Verica se o path é valido utilzando a class Files
 	 * @param path Caminho para verificar
 	 * @return True para caminho correto
 	 */
