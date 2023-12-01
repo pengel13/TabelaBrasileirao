@@ -12,15 +12,6 @@ public class Rodada {
 
 	}
 
-	public Rodada(int numeroRodada, Partida partida1, Partida partida2, Partida partida3, Partida partida4,
-			Partida partida5) {
-		this.partida1 = partida1;
-		this.partida2 = partida2;
-		this.partida3 = partida3;
-		this.partida4 = partida4;
-		this.partida5 = partida5;
-	}
-
 	public Rodada(int numeroRodada) {
 		this.numeroRodada = numeroRodada;
 		listasDePartidasPorTime = new ArrayList<Partida>();

@@ -11,12 +11,14 @@ import main.services.LeitorJsonService;
 
 public class Main {
 
-	private static Tabela tabelaPronta = new Tabela();
-	private static Tabela tabelaNova = new Tabela();
 	private static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		menu();
+		try {
+			menu();
+		} catch (RuntimeException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 
 		in.close();
 	}
@@ -24,45 +26,43 @@ public class Main {
 	public static void menu() {
 		System.out.println("...TABELA BRASILEIRÃO (10 TIMES)...");
 		System.out.println();
-		System.out.println(
-				"Qual ação deseja fazer:\n 1 - Configurar uma tabela desde o início\n 2 - Ver tabela pronta com simulação\n 3 - Inserir times e pontuações através de arquivo JSON");
-		int opcao = in.nextInt();
 
-		switch (opcao) {
-		case 1:
-			montarTabela();
-			break;
-		case 2:
-			System.out.println();
-			System.out.println("...Simulando jogos...");
+		int opcao = 0;
 
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		do {
+			System.out.println(
+					"Qual ação deseja fazer:\n 1 - Configurar uma tabela desde o início\n 2 - Ver tabela pronta com simulação\n 3 - Inserir times e pontuações através de arquivo JSON\n 0 - Sair");
+			opcao = in.nextInt();
+
+			switch (opcao) {
+			case 0:
+				break;
+			case 1:
+				montarTabela();
+				break;
+			case 2:
+				Tabela tabelaPronta = new Tabela();
+				System.out.println();
+				System.out.println("...Simulando jogos...");
+
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				configuraTimes(tabelaPronta);
+				menuDeSimulacaoDePartidas(tabelaPronta);
+
+				break;
+			case 3:
+				arquivoJsonMenu();
+				break;
 			}
 
-			configuraTimes();
-			menuDeSimulacaoDePartidas();
-			EscritorJsonService escritorJson = new EscritorJsonService(tabelaPronta.getTabelaPriorityQueue());
+		} while (opcao != 0);
 
-			System.out.println("Deja salvar a tabela em um arquivo JSON? (Sim/Não)");
-			in.nextLine();
-			String salvarEmJsonOpcao = in.nextLine();
-
-			if (salvarEmJsonOpcao.equalsIgnoreCase("Sim")) {
-				System.out.println();
-				escritorJson.escreverTabelaNoJson("tabelaJson.json");
-				System.out.println();
-			}
-
-			tabelaPronta.verTabela();
-			break;
-		case 3:
-			arquivoJsonMenu();
-			break;
-		}
-
+		System.out.println("Saindo...");
 	}
 
 	public static void arquivoJsonMenu() {
@@ -72,19 +72,22 @@ public class Main {
 		String path = in.nextLine();
 
 		if (path.isEmpty()) {
-			System.out.println("Puxando de './resources/times.json'...");
 			path = "./resources/times.json";
+			System.out.println("Puxando de '" + path + "'...");
+
 		}
 
 		imprimirTimes(path);
 	}
 
 	public static void montarTabela() {
-		System.out.println("Quantos times quer adicionar");
+		Tabela tabelaNova = new Tabela();
+		System.out.print("Quantos times quer adicionar: ");
 		int opcao = in.nextInt();
 
+		in.nextLine();
 		for (int i = 0; i < opcao; i++) {
-			System.out.println("Time " + i + ": ");
+			System.out.print("Time " + (i + 1) + ": ");
 			String nomeDoTime = in.nextLine();
 
 			Time time = new Time(nomeDoTime);
@@ -93,40 +96,76 @@ public class Main {
 		}
 
 		System.out.println("");
+
+		System.out.println("Selecione os placares dessas partidas: (Ex: 2x4)");
+
+		int numeroRodada = 0;
+
+		for (int i = 0; i < tabelaNova.getTabelaPriorityQueue().size(); i++) {
+			Rodada rodada = new Rodada(++numeroRodada);
+			Time timeCasa = tabelaNova.retornaTimeDaTabela(i);
+
+			for (int j = 0; j < tabelaNova.getTabelaPriorityQueue().size(); j++) {
+				if (i != j) {
+					Time timeVisitante = tabelaNova.retornaTimeDaTabela(j);
+
+					System.out.print(timeCasa.getNome() + " x " + timeVisitante.getNome() + ": ");
+					String[] placar = (in.nextLine()).split("x");
+					int placarCasa = Integer.parseInt(placar[0]);
+					int placarVisitante = Integer.parseInt(placar[1]);
+
+					Partida partida = new Partida(timeCasa, timeVisitante, placarCasa, placarVisitante);
+
+					rodada.addPartida(partida);
+					tabelaNova.registraPartida(partida);
+					Tabela.incrementaRodadasJogadasNoCampeonato();
+				}
+			}
+
+			timeCasa.incrementaRodadasJogadas();
+			tabelaNova.adicionaRodadaNaLista(rodada);
+		}
+
+		System.out.println();
+		tabelaNova.verTabela();
+		System.out.println();
+
+		System.out.println("Deseja salvar a tabela em um arquivo JSON? (Sim/Não)");
+		String salvarEmJsonOpcao = in.nextLine();
+
+		EscritorJsonService escritorJson = new EscritorJsonService(tabelaNova.getTabelaPriorityQueue());
+
+		if (salvarEmJsonOpcao.equalsIgnoreCase("Sim")) {
+			System.out.println();
+			System.out.print("Nome do arquivo: ");
+			String nomeDoArquivo = in.nextLine() + ".json";
+			escritorJson.escreverTabelaNoJson(nomeDoArquivo);
+			System.out.println();
+		}
+
 	}
 
-	public static void configuraTimes() {
-		Time time1 = new Time("Grêmio");
-		Time time2 = new Time("Fluminense");
-		Time time3 = new Time("Atlético MG");
-		Time time4 = new Time("São Paulo");
-		Time time5 = new Time("Palmeiras");
-		Time time6 = new Time("Coritiba");
-		Time time7 = new Time("Bragantino");
-		Time time8 = new Time("Botafogo");
-		Time time9 = new Time("Juventude");
-		Time time10 = new Time("Brasil de Pelotas");
-
-		tabelaPronta.addTime(time1);
-		tabelaPronta.addTime(time2);
-		tabelaPronta.addTime(time3);
-		tabelaPronta.addTime(time4);
-		tabelaPronta.addTime(time5);
-		tabelaPronta.addTime(time6);
-		tabelaPronta.addTime(time7);
-		tabelaPronta.addTime(time8);
-		tabelaPronta.addTime(time9);
-		tabelaPronta.addTime(time10);
+	public static void configuraTimes(Tabela tabelaPronta) {
+		tabelaPronta.addTime(new Time("Grêmio"));
+		tabelaPronta.addTime(new Time("Fluminense"));
+		tabelaPronta.addTime(new Time("Atlético MG"));
+		tabelaPronta.addTime(new Time("São Paulo"));
+		tabelaPronta.addTime(new Time("Palmeiras"));
+		tabelaPronta.addTime(new Time("Coritiba"));
+		tabelaPronta.addTime(new Time("Bragantino"));
+		tabelaPronta.addTime(new Time("Botafogo"));
+		tabelaPronta.addTime(new Time("Juventude"));
+		tabelaPronta.addTime(new Time("Brasil de Pelotas"));
 	}
 
-	public static void menuDeSimulacaoDePartidas() {
+	public static void menuDeSimulacaoDePartidas(Tabela tabelaPronta) {
 		int numeroRodada = 0;
 
 		for (int i = 0; i < 10; i++) {
 			Rodada rodada = new Rodada(++numeroRodada);
 			Time timeCasa = tabelaPronta.retornaTimeDaTabela(i);
 
-			for (int j = 1; j <= 4; j++) {
+			for (int j = 1; j <= 10; j++) {
 				Time timeVisitante = tabelaPronta.retornaTimeDaTabela((i + j) % 10);
 
 				if (!timeCasa.equals(timeVisitante)) {
@@ -150,6 +189,22 @@ public class Main {
 			System.out.println();
 		}
 
+		EscritorJsonService escritorJson = new EscritorJsonService(tabelaPronta.getTabelaPriorityQueue());
+
+		System.out.println("Deseja salvar a tabela em um arquivo JSON? (Sim/Não)");
+		in.nextLine();
+		String salvarEmJsonOpcao = in.nextLine();
+
+		if (salvarEmJsonOpcao.equalsIgnoreCase("Sim")) {
+			System.out.println();
+			System.out.print("Nome do arquivo: ");
+			String nomeDoArquivo = in.nextLine() + ".json";
+			escritorJson.escreverTabelaNoJson(nomeDoArquivo);
+			System.out.println();
+		}
+
+		tabelaPronta.verTabela();
+
 	}
 
 	public static Partida simulaPartida(Time timeCasa, Time timeVisitante) {
@@ -161,10 +216,8 @@ public class Main {
 	}
 
 	public static void imprimirTimes(String path) {
+		Tabela tabela = new Tabela();
 		LeitorJsonService lerJson = new LeitorJsonService();
-		for (Time time : lerJson.lerListaDeTimes(path)) {
-			System.out.println("Time: " + time + "\n");
-
-		}
+		tabela.printarListaComFormatoDeTabela(lerJson.lerListaDeTimes(path));
 	}
 }

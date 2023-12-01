@@ -84,8 +84,7 @@ public class Partida {
 
 	@Override
 	public String toString() {
-		return "Partida [timeCasa=" + timeCasa + ", timeVisitante=" + timeVisitante + ", golsCasa=" + golsCasa
-				+ ", golsVisitante=" + golsVisitante + "]\n";
+		return "Partida: " + timeCasa.getNome() + " " + golsCasa + " x " + golsVisitante + " " + timeVisitante.getNome() + ".\n";
 	}
 	
 }

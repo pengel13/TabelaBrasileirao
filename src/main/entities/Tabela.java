@@ -46,7 +46,26 @@ public class Tabela {
 	    System.out.println();
 	}
 
+	public void printarListaComFormatoDeTabela(List<Time> listaDeTimes) {
 
+	    Collections.sort(listaDeTimes, numeroDePontosComparator.thenComparing(numeroDeVitoriasComparator)
+	            .thenComparing(saldoDeGolsComparator));
+
+	    System.out.printf("%-20s | %-15s | %-10s | %-10s | %-10s | %-10s | %-15s | %-15s | %-15s | %-20s%n", "Time",
+	            "Pontuação", "Vitórias", "Empates", "Derrotas", "Saldo de Gols  ", "Gols Marcados", "Gols Sofridos",
+	            "Aproveitamento   ", "Partidas Jogadas");
+	    System.out.println(
+	            "----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+	    for (Time time : listaDeTimes) {
+	        System.out.printf("%-20s | %-15s | %-10d | %-10d | %-10d | %-15d | %-15d | %-15d | %-18.2f | %-20d%n",
+	                time.getNome(), time.getPontuacao(), time.getVitorias(), time.getEmpates(), time.getDerrotas(),
+	                time.getSaldoGols(), time.getGolsMarcados(), time.getGolsSofridos(), time.getPercentualAproveitamento(),
+	                time.getRodadasJogadas() + 1);
+	    }
+
+	    System.out.println();
+	}
 
 	public boolean addTime(Time time) {
 		tabela.add(time);
